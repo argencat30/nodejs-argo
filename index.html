@@ -3,240 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeLife // 程序员的个人空间</title>
+    <title>我的日常碎碎念 ｜ Blog</title>
     <style>
-        /* 全局变量与复位 */
-        :root {
-            --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent-color: #58a6ff;
-            --border-color: #21262d;
-            --card-bg: #161b22;
-            --code-bg: #21262d;
-        }
-
+        /* 基础全局样式 */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
             line-height: 1.6;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
         }
 
         a {
-            color: var(--accent-color);
             text-decoration: none;
-            transition: opacity 0.2s;
+            color: inherit;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* 头部区域 */
+        /* 页头区域 */
         header {
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .profile {
+        .nav-bar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            margin-left: 25px;
+            font-size: 0.95rem;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007aff;
+        }
+
+        /* 个人简介横幅 */
+        .profile-banner {
+            background: linear-gradient(135deg, #e0f2fe 0%, #e0e7ff 100%);
+            padding: 50px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
         }
 
         .avatar {
-            width: 60px;
-            height: 60px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #58a6ff, #bc8cff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #fff;
-            font-size: 1.5rem;
+            background-color: #fff;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            object-fit: cover;
         }
 
-        h1 {
+        .profile-banner h1 {
             font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
+            color: #1e293b;
+            margin-bottom: 8px;
         }
 
-        .bio {
-            color: var(--text-muted);
+        .profile-banner p {
+            color: #64748b;
             font-size: 0.95rem;
-            margin-top: 0.5rem;
         }
 
-        nav {
-            margin-top: 1rem;
-            font-size: 0.9rem;
+        /* 博客主内容区（双栏布局） */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
         }
 
-        nav a {
-            margin-right: 1rem;
-            color: var(--text-muted);
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        /* 文章列表区域 */
-        .section-title {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        /* 文章列表 */
+        .post-list h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #1e293b;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
         }
 
-        .section-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--border-color);
+        .post-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .post-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.75rem;
-            margin-bottom: 3rem;
-        }
-
-        .post-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
         }
 
         .post-meta {
             font-size: 0.85rem;
-            color: var(--text-muted);
-            font-family: monospace;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .post-meta span {
+            margin-right: 15px;
         }
 
         .post-title {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .post-excerpt {
+            color: #475569;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            font-size: 0.9rem;
+            color: #007aff;
             font-weight: 500;
         }
 
-        .post-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 0.25rem;
+        /* 侧边栏 */
+        .sidebar-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
-        .tags {
+        .sidebar-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 15px;
+            border-left: 4px solid #007aff;
+            padding-left: 10px;
+        }
+
+        .tag-cloud {
             display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .tag {
-            font-family: monospace;
-            font-size: 0.75rem;
-            background-color: var(--code-bg);
-            color: var(--accent-color);
-            padding: 0.1rem 0.5rem;
-            border-radius: 3px;
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .tag:hover {
+            background-color: #e2e8f0;
+            color: #0f172a;
         }
 
         /* 页脚 */
         footer {
-            margin-top: 5rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
             text-align: center;
+            padding: 40px 0;
+            color: #94a3b8;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            font-family: monospace;
+            margin-top: 60px;
+            border-top: 1px solid #eef2f5;
+        }
+
+        /* 响应式设计（手机端适配） */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .profile-banner {
+                margin-bottom: 20px;
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <header>
+        <div class="container nav-bar">
+            <div class="logo">🌿 DailyNotes</div>
+            <nav class="nav-links">
+                <a href="#">首页</a>
+                <a href="#">归档</a>
+                <a href="#">关于我</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="profile-banner">
+            <img class="avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Avatar">
+            <h1>你好，我是阿星 👋</h1>
+            <p>这里是我记录生活、摄影和瞎折腾的地方。很高兴遇见你！</p>
+        </div>
+    </section>
+
+    <main class="container main-content">
         
-        <header>
-            <div class="profile">
-                <div class="avatar">&lt;/&gt;</div>
-                <div>
-                    <h1>Hello, I'm Alex.</h1>
-                    <p class="bio">全栈开发工程师 / 开源爱好者 / 偶尔写写有 bug 的代码</p>
+        <section class="post-list">
+            <h2>✨ 近期碎碎念</h2>
+
+            <article class="post-card">
+                <div class="post-meta">
+                    <span>📅 2026年7月08日</span>
+                    <span>🏷️ 咖啡生活</span>
+                </div>
+                <a href="#"><h3 class="post-title">今天终于打卡了那家收藏已久的社区咖啡店</h3></a>
+                <p class="post-excerpt">
+                    上个周末终于有空去了躺街角那家开了三年的手冲咖啡馆。店面不大，但落地窗洒进来的阳光刚刚好。点了一杯耶加雪菲，入口是明亮的柑橘酸调，配上店里放的
+                    Jazz 音乐，整个人被治愈了。有时候，生活里的幸福感就是这么简单……
+                </p>
+                <a href="#" class="read-more">阅读全文 →</a>
+            </article>
+
+            <article class="post-card">
+                <div class="post-meta">
+                    <span>📅 2026年7月02日</span>
+                    <span>🏷️ 数码/折腾</span>
+                </div>
+                <a href="#"><h3 class="post-title">把桌面精简到极致是一种什么体验？</h3></a>
+                <p class="post-excerpt">
+                    断舍离了一整天，把桌面上各种杂乱的线材和没怎么用过的摆件全部收进了收纳箱。现在只留下一台显示器、一把机械键盘和一盏屏幕挂灯。视觉清爽之后，连码字的效率都变高了。
+                </p>
+                <a href="#" class="read-more">阅读全文 →</a>
+            </article>
+
+            <article class="post-card">
+                <div class="post-meta">
+                    <span>📅 2026年6月25日</span>
+                    <span>🏷️ 周末去哪儿</span>
+                </div>
+                <a href="#"><h3 class="post-title">夏日傍晚的骑行日记：追一场橘红色的晚霞</h3></a>
+                <p class="post-excerpt">
+                    下班后临时起意，骑上单车沿着江边一路向西。风吹在脸上已经有了夏天的味道。在路过大桥的时候，刚好碰上了今年见过最温柔的晚霞，整个天空像被泼了橘色的墨水……
+                </p>
+                <a href="#" class="read-more">阅读全文 →</a>
+            </article>
+        </section>
+
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-title">📢 碎碎念</div>
+                <p style="font-size: 0.9rem; color: #475569;">“保持对生活的热爱和好奇心，把平凡的日子过得闪闪发光。”</p>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-title">🏷️ 热门标签</div>
+                <div class="tag-cloud">
+                    <a href="#" class="tag">生活随笔 (5)</a>
+                    <a href="#" class="tag">摄影 (3)</a>
+                    <a href="#" class="tag">咖啡 (2)</a>
+                    <a href="#" class="tag">数码 (4)</a>
+                    <a href="#" class="tag">骑行 (1)</a>
+                    <a href="#" class="tag">观影笔记 (6)</a>
                 </div>
             </div>
-            <nav>
-                <a href="#posts">文章</a>
-                <a href="https://github.com" target="_blank">GitHub</a>
-                <a href="https://twitter.com" target="_blank">Twitter</a>
-                <a href="mailto:your-email@example.com">邮件</a>
-            </nav>
-        </header>
+        </aside>
+        
+    </main>
 
-        <main>
-            <div class="section-title">Recent Posts</div>
-            
-            <div class="post-list" id="posts">
-                
-                <article class="post-item">
-                    <div class="post-meta">2026-07-05 &bull; 8 min read</div>
-                    <a href="#" class="post-title">深入理解 JavaScript 中的事件循环与微任务队列</a>
-                    <p class="post-desc">从底层 V8 引擎的视角，重新拆解 MacroTask 与 MicroTask 的执行顺序与浏览器渲染时机。</p>
-                    <div class="tags">
-                        <span class="tag">#javascript</span>
-                        <span class="tag">#v8</span>
-                    </div>
-                </article>
-
-                <article class="post-item">
-                    <div class="post-meta">2026-06-20 &bull; 5 min read</div>
-                    <a href="#" class="post-title">为什么我从 Webpack 转向了 Vite？</a>
-                    <p class="post-desc">聊聊大型前端项目构建工具的迁移痛点，以及生产环境下的性能数据对比。</p>
-                    <div class="tags">
-                        <span class="tag">#frontend</span>
-                        <span class="tag">#vite</span>
-                    </div>
-                </article>
-
-                <article class="post-item">
-                    <div class="post-meta">2026-05-14 &bull; 12 min read</div>
-                    <a href="#" class="post-title">基于 Go 语言实现一个轻量级的分布式 KV 存储</a>
-                    <p class="post-desc">本篇将带你用 500 行 Go 代码实现 Raft 协议的核心状态机，搞懂分布式共识机制。</p>
-                    <div class="tags">
-                        <span class="tag">#go</span>
-                        <span class="tag">#distributed-system</span>
-                    </div>
-                </article>
-
-            </div>
-        </main>
-
-        <footer>
-            <p>&copy; 2026 Alex. Powered by clean HTML & CSS.</p>
-        </footer>
-
-    </div>
+    <footer>
+        <div class="container">
+            <p>© 2026 阿星的日常博客. Powered by My Heart.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
